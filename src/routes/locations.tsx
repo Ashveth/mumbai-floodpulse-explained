@@ -7,7 +7,7 @@ import { ACTIONS, categorise, explainRecord, fmt, summariseLocations, type RiskL
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/locations")({
-  validateSearch: (s: Record<string, unknown>) => ({ id: typeof s.id === "string" ? s.id : undefined }),
+  validateSearch: (s: Record<string, unknown>) => ({ id: typeof s["id"] === "string" ? s["id"] : undefined }),
   head: () => seo("Location Intelligence", "Explain demo risk scores for each Mumbai location by rainfall, incidents, terrain and drainage."),
   component: () => (
     <PageShell title="Location Intelligence" description="Why a location scores the way it does — factor by factor">

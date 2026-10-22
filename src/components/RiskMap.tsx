@@ -6,7 +6,7 @@ import type { FloodRecord } from "@/lib/floodpulse";
 const css = (v: string) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const COLOR_VAR: Record<string, string> = { Low: "--risk-low", Moderate: "--risk-moderate", High: "--risk-high", "Very High": "--risk-veryhigh" };
 
-export default function RiskMap({ points, selectedId, onSelect }: { points: FloodRecord[]; selectedId?: string; onSelect: (r: FloodRecord) => void }) {
+export default function RiskMap({ points, selectedId, onSelect }: { points: FloodRecord[]; selectedId?: string | undefined; onSelect: (r: FloodRecord) => void }) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const layer = useRef<L.LayerGroup | null>(null);

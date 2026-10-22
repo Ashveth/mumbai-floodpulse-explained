@@ -31,7 +31,7 @@ function MapPage() {
   const [selected, setSelected] = useState<FloodRecord | null>(null);
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);
-  useEffect(() => { if (!date && dates.length) setDate(dates[dates.length - 1]); }, [dates, date]);
+  useEffect(() => { if (!date && dates.length) setDate(dates[dates.length - 1] ?? ""); }, [dates, date]);
 
   const dayRecords = records.filter((r) => r.date === date);
   const excluded = dayRecords.filter((r) => !validCoord(r)).length;
