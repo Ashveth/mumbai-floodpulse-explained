@@ -138,7 +138,6 @@ export function PageShell({ page, children }: { page: string; children: ReactNod
         </div>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <SyntheticBanner />
         <header className="border-b border-border bg-card px-4 py-4 md:px-8">
           <div className="flex flex-wrap items-start gap-4">
             <button className="rounded-md border border-border p-2 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu">
@@ -150,7 +149,6 @@ export function PageShell({ page, children }: { page: string; children: ReactNod
             </div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               <AreaSearch className="w-full sm:w-64" />
-              <span className="rounded border border-warning/50 bg-warning/15 px-2 py-1 font-semibold">{t("header.mode")}</span>
               {ds.status === "ready" && <span className="text-muted-foreground">{t("header.updated")} {ds.dataset.processedAt.toLocaleTimeString()}</span>}
               {ds.status === "loading" && <span className="text-muted-foreground">…</span>}
               {ds.status === "error" && <span className="rounded bg-destructive/15 px-2 py-1 font-semibold text-destructive">Dataset error</span>}
@@ -239,5 +237,5 @@ export function RiskBadge({ level }: { level: string }) {
     High: "bg-risk-high/25 border-risk-high",
     "Very High": "bg-risk-veryhigh/20 border-risk-veryhigh text-destructive",
   };
-  return <span className={cn("inline-block rounded border px-1.5 py-0.5 text-[11px] font-semibold", cls[level] ?? "border-border")}>{level ? t(`risk.${level}`) : "Not available"} <span className="font-normal opacity-70">(demo)</span></span>;
+  return <span className={cn("inline-block rounded border px-1.5 py-0.5 text-[11px] font-semibold", cls[level] ?? "border-border")}>{level ? t(`risk.${level}`) : "Not available"}</span>;
 }

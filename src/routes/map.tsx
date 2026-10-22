@@ -108,7 +108,7 @@ function MapPage() {
                 <dt className="text-muted-foreground">Drainage proxy</dt><dd className="text-right font-semibold">{fmt(selected.drainage_coverage_proxy_synthetic, "", 2)}</dd>
                 <dt className="text-muted-foreground">Approx. coords</dt><dd className="text-right font-semibold">{fmt(selected.latitude_approx, "", 4)}, {fmt(selected.longitude_approx, "", 4)}</dd>
                 <dt className="text-muted-foreground">Observed label</dt><dd className="text-right font-semibold">{selected.observed_flood_label === "NOT_AVAILABLE" ? "Not available" : selected.observed_flood_label || "Not available"}</dd>
-                <dt className="text-muted-foreground">Data status</dt><dd className="text-right font-semibold text-warning">{selected.data_status || "Not available"}</dd>
+                
               </dl>
               <Link to="/locations" search={{ id: selected.location_id }} className="block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-primary-foreground hover:bg-primary/90">Explain this location</Link>
             </div>
