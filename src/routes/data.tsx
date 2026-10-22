@@ -9,7 +9,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/data")({
   head: () => seo("Data Explorer", "Inspect, filter and quality-check the Mumbai FloodPulse synthetic demo dataset."),
   component: () => (
-    <PageShell title="Data Explorer" description="Original records, column checks and data-quality report">
+    <PageShell page="data">
       <DataPage />
     </PageShell>
   ),

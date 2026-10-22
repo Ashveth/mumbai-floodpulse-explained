@@ -1,0 +1,208 @@
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+
+export type Lang = "en" | "hi" | "mr";
+export const LANGS: { code: Lang; label: string }[] = [
+  { code: "en", label: "English" },
+  { code: "hi", label: "हिन्दी" },
+  { code: "mr", label: "मराठी" },
+];
+
+type Dict = Record<string, string>;
+
+const en: Dict = {
+  "nav.home": "Home",
+  "nav.map": "Flood Map",
+  "nav.area": "My Area",
+  "nav.rain": "Rain",
+  "nav.whatif": "What If?",
+  "nav.safety": "Stay Safe",
+  "nav.data": "All Data",
+  "nav.how": "How It Works",
+  "nav.about": "About & Sources",
+  "brand.sub": "Mumbai · flood risk guide",
+  "brand.tag": "Know your area. Stay prepared.",
+  "brand.foot": "Student hackathon project — not an official warning system.",
+  "banner": "PRACTICE DATA ONLY — NOT REAL RAIN OR FLOOD READINGS",
+  "banner.sub": "For real alerts, follow BMC and IMD.",
+  "header.mode": "Practice data",
+  "header.updated": "Loaded",
+  "header.map": "Open Map",
+  "search.placeholder": "Find your area — Kurla, Andheri, Dadar…",
+  "search.none": "No matching area in this data",
+  "page.home.t": "Home",
+  "page.home.d": "See which areas could get flooded, why, and how to get ready",
+  "page.map.t": "Flood Map",
+  "page.map.d": "Tap a dot to see rain and risk for that area (positions are approximate)",
+  "page.area.t": "My Area",
+  "page.area.d": "Why your area has the risk level it has",
+  "page.rain.t": "Rain",
+  "page.rain.d": "How much it rained, day by day (practice data)",
+  "page.whatif.t": "What If?",
+  "page.whatif.d": "Try: what if it rains more? See which areas would be hit harder",
+  "page.safety.t": "Stay Safe",
+  "page.safety.d": "Simple monsoon tips and official helpline numbers",
+  "page.data.t": "All Data",
+  "page.data.d": "Every row in the data file, with quality checks",
+  "page.how.t": "How It Works",
+  "page.how.d": "How the risk numbers are made — and what we can't promise",
+  "page.about.t": "About & Sources",
+  "page.about.d": "Where the data comes from and its limits",
+  "hero.kicker": "Know your area. Stay prepared.",
+  "hero.title": "Will my area flood? See the risk, the reasons, and what to do.",
+  "hero.sub": "Look up your area in Mumbai to see rain, flood risk, and simple steps to stay safe in the monsoon.",
+  "hero.cta.map": "Open the flood map",
+  "hero.cta.safety": "Monsoon safety tips",
+  "hero.note.t": "This is practice data",
+  "hero.note.b": "All rain, flood and risk numbers here are made up for testing. They are not real readings. Always follow official BMC and IMD alerts.",
+  "risk.Low": "Low",
+  "risk.Moderate": "Medium",
+  "risk.High": "High",
+  "risk.Very High": "Very High",
+  "safety.helplines": "Emergency helplines",
+  "safety.helplines.sub": "Official numbers from BMC and Mumbai district websites. Save them in your phone.",
+  "safety.before": "Before heavy rain",
+  "safety.during": "During flooding",
+  "safety.after": "After the water goes down",
+  "safety.alerts": "Where to get real alerts",
+  "safety.source": "Numbers checked from official BMC / district websites on 22 Oct 2026. Please confirm on the official site.",
+};
+
+const hi: Dict = {
+  "nav.home": "होम",
+  "nav.map": "बाढ़ नक्शा",
+  "nav.area": "मेरा इलाका",
+  "nav.rain": "बारिश",
+  "nav.whatif": "अगर ऐसा हो?",
+  "nav.safety": "सुरक्षित रहें",
+  "nav.data": "पूरा डेटा",
+  "nav.how": "यह कैसे काम करता है",
+  "nav.about": "जानकारी व स्रोत",
+  "brand.sub": "मुंबई · बाढ़ जोखिम गाइड",
+  "brand.tag": "अपना इलाका जानें। तैयार रहें।",
+  "brand.foot": "हैकाथॉन प्रोजेक्ट — यह आधिकारिक चेतावनी प्रणाली नहीं है।",
+  "banner": "सिर्फ़ अभ्यास डेटा — असली बारिश या बाढ़ के आंकड़े नहीं",
+  "banner.sub": "असली अलर्ट के लिए BMC और IMD देखें।",
+  "header.mode": "अभ्यास डेटा",
+  "header.updated": "लोड हुआ",
+  "header.map": "नक्शा खोलें",
+  "search.placeholder": "अपना इलाका खोजें — कुर्ला, अंधेरी, दादर…",
+  "search.none": "इस डेटा में यह इलाका नहीं मिला",
+  "page.home.t": "होम",
+  "page.home.d": "कौन से इलाके डूब सकते हैं, क्यों, और कैसे तैयार रहें",
+  "page.map.t": "बाढ़ नक्शा",
+  "page.map.d": "किसी बिंदु पर टैप करें और उस इलाके की बारिश व जोखिम देखें",
+  "page.area.t": "मेरा इलाका",
+  "page.area.d": "आपके इलाके का जोखिम इतना क्यों है",
+  "page.rain.t": "बारिश",
+  "page.rain.d": "हर दिन कितनी बारिश हुई (अभ्यास डेटा)",
+  "page.whatif.t": "अगर ऐसा हो?",
+  "page.whatif.d": "अगर ज़्यादा बारिश हो तो कौन से इलाके ज़्यादा प्रभावित होंगे",
+  "page.safety.t": "सुरक्षित रहें",
+  "page.safety.d": "मानसून के आसान सुझाव और आधिकारिक हेल्पलाइन नंबर",
+  "page.data.t": "पूरा डेटा",
+  "page.data.d": "डेटा फ़ाइल की हर पंक्ति, जांच के साथ",
+  "page.how.t": "यह कैसे काम करता है",
+  "page.how.d": "जोखिम के आंकड़े कैसे बनते हैं — और हम क्या वादा नहीं कर सकते",
+  "page.about.t": "जानकारी व स्रोत",
+  "page.about.d": "डेटा कहाँ से आया और उसकी सीमाएँ",
+  "hero.kicker": "अपना इलाका जानें। तैयार रहें।",
+  "hero.title": "क्या मेरे इलाके में पानी भरेगा? जोखिम, कारण और उपाय देखें।",
+  "hero.sub": "मुंबई में अपना इलाका खोजें — बारिश, बाढ़ का जोखिम और मानसून में सुरक्षित रहने के आसान तरीके।",
+  "hero.cta.map": "बाढ़ नक्शा खोलें",
+  "hero.cta.safety": "मानसून सुरक्षा सुझाव",
+  "hero.note.t": "यह अभ्यास डेटा है",
+  "hero.note.b": "यहाँ के सभी बारिश, बाढ़ और जोखिम के आंकड़े परीक्षण के लिए बनाए गए हैं। ये असली नहीं हैं। हमेशा BMC और IMD के आधिकारिक अलर्ट मानें।",
+  "risk.Low": "कम",
+  "risk.Moderate": "मध्यम",
+  "risk.High": "ज़्यादा",
+  "risk.Very High": "बहुत ज़्यादा",
+  "safety.helplines": "आपातकालीन हेल्पलाइन",
+  "safety.helplines.sub": "BMC और मुंबई ज़िला वेबसाइट से आधिकारिक नंबर। इन्हें फ़ोन में सेव करें।",
+  "safety.before": "भारी बारिश से पहले",
+  "safety.during": "पानी भरने के दौरान",
+  "safety.after": "पानी उतरने के बाद",
+  "safety.alerts": "असली अलर्ट कहाँ मिलेंगे",
+  "safety.source": "नंबर 22 अक्टूबर 2026 को आधिकारिक BMC / ज़िला वेबसाइट से जांचे गए। कृपया आधिकारिक साइट पर पुष्टि करें।",
+};
+
+const mr: Dict = {
+  "nav.home": "मुख्यपृष्ठ",
+  "nav.map": "पूर नकाशा",
+  "nav.area": "माझा परिसर",
+  "nav.rain": "पाऊस",
+  "nav.whatif": "जर असे झाले तर?",
+  "nav.safety": "सुरक्षित राहा",
+  "nav.data": "संपूर्ण डेटा",
+  "nav.how": "हे कसे काम करते",
+  "nav.about": "माहिती व स्रोत",
+  "brand.sub": "मुंबई · पूर धोका मार्गदर्शक",
+  "brand.tag": "आपला परिसर जाणा. तयार राहा.",
+  "brand.foot": "हॅकेथॉन प्रकल्प — ही अधिकृत इशारा प्रणाली नाही.",
+  "banner": "फक्त सराव डेटा — खरी पाऊस किंवा पुराची नोंद नाही",
+  "banner.sub": "खऱ्या इशाऱ्यांसाठी BMC आणि IMD पाहा.",
+  "header.mode": "सराव डेटा",
+  "header.updated": "लोड झाले",
+  "header.map": "नकाशा उघडा",
+  "search.placeholder": "आपला परिसर शोधा — कुर्ला, अंधेरी, दादर…",
+  "search.none": "या डेटामध्ये हा परिसर सापडला नाही",
+  "page.home.t": "मुख्यपृष्ठ",
+  "page.home.d": "कोणत्या भागात पाणी भरू शकते, का, आणि कशी तयारी करावी",
+  "page.map.t": "पूर नकाशा",
+  "page.map.d": "एखाद्या ठिपक्यावर टॅप करा आणि त्या भागाचा पाऊस व धोका पाहा",
+  "page.area.t": "माझा परिसर",
+  "page.area.d": "आपल्या परिसराचा धोका इतका का आहे",
+  "page.rain.t": "पाऊस",
+  "page.rain.d": "दररोज किती पाऊस पडला (सराव डेटा)",
+  "page.whatif.t": "जर असे झाले तर?",
+  "page.whatif.d": "जास्त पाऊस पडला तर कोणत्या भागांना जास्त फटका बसेल",
+  "page.safety.t": "सुरक्षित राहा",
+  "page.safety.d": "पावसाळ्यातील सोप्या टिप्स आणि अधिकृत हेल्पलाइन क्रमांक",
+  "page.data.t": "संपूर्ण डेटा",
+  "page.data.d": "डेटा फाइलमधील प्रत्येक ओळ, तपासणीसह",
+  "page.how.t": "हे कसे काम करते",
+  "page.how.d": "धोक्याचे आकडे कसे तयार होतात — आणि आम्ही काय वचन देऊ शकत नाही",
+  "page.about.t": "माहिती व स्रोत",
+  "page.about.d": "डेटा कुठून आला आणि त्याच्या मर्यादा",
+  "hero.kicker": "आपला परिसर जाणा. तयार राहा.",
+  "hero.title": "माझ्या भागात पाणी भरेल का? धोका, कारणे आणि उपाय पाहा.",
+  "hero.sub": "मुंबईत आपला परिसर शोधा — पाऊस, पुराचा धोका आणि पावसाळ्यात सुरक्षित राहण्याचे सोपे उपाय.",
+  "hero.cta.map": "पूर नकाशा उघडा",
+  "hero.cta.safety": "पावसाळी सुरक्षा टिप्स",
+  "hero.note.t": "हा सराव डेटा आहे",
+  "hero.note.b": "येथील सर्व पाऊस, पूर आणि धोक्याचे आकडे चाचणीसाठी तयार केले आहेत. ते खरे नाहीत. नेहमी BMC आणि IMD चे अधिकृत इशारे पाळा.",
+  "risk.Low": "कमी",
+  "risk.Moderate": "मध्यम",
+  "risk.High": "जास्त",
+  "risk.Very High": "खूप जास्त",
+  "safety.helplines": "आपत्कालीन हेल्पलाइन",
+  "safety.helplines.sub": "BMC आणि मुंबई जिल्हा संकेतस्थळांवरील अधिकृत क्रमांक. फोनमध्ये सेव्ह करा.",
+  "safety.before": "मुसळधार पावसापूर्वी",
+  "safety.during": "पाणी भरलेले असताना",
+  "safety.after": "पाणी ओसरल्यानंतर",
+  "safety.alerts": "खरे इशारे कुठे मिळतील",
+  "safety.source": "क्रमांक २२ ऑक्टोबर २०२६ रोजी अधिकृत BMC / जिल्हा संकेतस्थळांवरून तपासले. कृपया अधिकृत साइटवर खात्री करा.",
+};
+
+export const DICTS: Record<Lang, Dict> = { en, hi, mr };
+
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string };
+const I18n = createContext<Ctx>({ lang: "en", setLang: () => {}, t: (k) => en[k] ?? k });
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [lang, setLangState] = useState<Lang>("en");
+  useEffect(() => {
+    const saved = window.localStorage.getItem("fp-lang") as Lang | null;
+    if (saved && saved in DICTS) setLangState(saved);
+  }, []);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    window.localStorage.setItem("fp-lang", l);
+  };
+  const t = (k: string) => DICTS[lang][k] ?? en[k] ?? k;
+  return <I18n.Provider value={{ lang, setLang, t }}>{children}</I18n.Provider>;
+}
+
+export const useT = () => useContext(I18n);

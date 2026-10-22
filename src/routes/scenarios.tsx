@@ -11,7 +11,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/scenarios")({
   head: () => seo("Scenario Planner", "Test hypothetical rainfall scenarios and see how demo risk categories and priorities could shift."),
   component: () => (
-    <PageShell title="Scenario Planner" description="Hypothetical what-if rainfall — not a forecast">
+    <PageShell page="whatif">
       <ScenarioPage />
     </PageShell>
   ),
