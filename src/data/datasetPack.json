@@ -1,0 +1,142 @@
+{
+ "dictionary": [
+  {
+   "column": "record_id",
+   "meaning": "Unique demo record key",
+   "format": "String",
+   "notes": "Generated identifier"
+  },
+  {
+   "column": "location_id",
+   "meaning": "Demo location/grid ID",
+   "format": "String",
+   "notes": "Synthetic grouping key"
+  },
+  {
+   "column": "location_name_demo",
+   "meaning": "Illustrative location label",
+   "format": "String",
+   "notes": "Not an official geographic unit"
+  },
+  {
+   "column": "date",
+   "meaning": "Demo observation date",
+   "format": "YYYY-MM-DD",
+   "notes": "Generated date"
+  },
+  {
+   "column": "latitude_approx",
+   "meaning": "Approximate mapping latitude",
+   "format": "Decimal degrees",
+   "notes": "Not verified precise location"
+  },
+  {
+   "column": "longitude_approx",
+   "meaning": "Approximate mapping longitude",
+   "format": "Decimal degrees",
+   "notes": "Not verified precise location"
+  },
+  {
+   "column": "rain_1h_mm_synthetic",
+   "meaning": "Synthetic rainfall in previous hour",
+   "format": "mm",
+   "notes": "Demo only"
+  },
+  {
+   "column": "rain_24h_mm_synthetic",
+   "meaning": "Synthetic rainfall accumulated over 24 hours",
+   "format": "mm",
+   "notes": "Demo only"
+  },
+  {
+   "column": "rain_72h_mm_synthetic",
+   "meaning": "Synthetic rainfall accumulated over 72 hours",
+   "format": "mm",
+   "notes": "Demo only"
+  },
+  {
+   "column": "historical_incident_count_synthetic",
+   "meaning": "Synthetic count for illustration",
+   "format": "Count",
+   "notes": "Not sourced from BMC or any official record"
+  },
+  {
+   "column": "elevation_m_synthetic_demo",
+   "meaning": "Illustrative elevation",
+   "format": "m",
+   "notes": "Not extracted from a DEM"
+  },
+  {
+   "column": "drainage_coverage_proxy_synthetic",
+   "meaning": "Synthetic drainage proxy between 0 and 1",
+   "format": "Index",
+   "notes": "Not actual drainage coverage"
+  },
+  {
+   "column": "risk_score_0_100_demo",
+   "meaning": "Illustrative weighted score",
+   "format": "0-100",
+   "notes": "Not a flood probability"
+  },
+  {
+   "column": "risk_level_demo",
+   "meaning": "Bucket of illustrative score",
+   "format": "Category",
+   "notes": "Not a verified hazard classification"
+  },
+  {
+   "column": "observed_flood_label",
+   "meaning": "Verified flood event label",
+   "format": "Category",
+   "notes": "Not available"
+  },
+  {
+   "column": "data_status",
+   "meaning": "Provenance label",
+   "format": "String",
+   "notes": "Must remain attached to all synthetic records"
+  }
+ ],
+ "readme": [
+  {
+   "item": "Purpose",
+   "details": "Starter dataset for building and demonstrating the Mumbai FloodPulse urban flood-risk prototype."
+  },
+  {
+   "item": "Critical caveat",
+   "details": "All rainfall values, historical incident counts, drainage proxies, elevations, risk scores and risk levels in the main dataset are synthetic or illustrative. They are NOT verified historical observations and must not be presented as real Mumbai flood data."
+  },
+  {
+   "item": "Coordinates",
+   "details": "Approximate demonstration coordinates for mapping the broad Mumbai urban area; not verified street-level or ward-level boundaries."
+  },
+  {
+   "item": "Date range",
+   "details": "2025-07-01 through 2025-07-30, generated for demo purposes only."
+  },
+  {
+   "item": "Observed flood labels",
+   "details": "No verified observed-flood labels are included. 'NOT_AVAILABLE' is deliberate. Do not train/evaluate a flood classifier using the synthetic risk level as if it were ground truth."
+  },
+  {
+   "item": "Risk score",
+   "details": "Illustrative weighted index only: 45% rainfall indicator, 25% synthetic historical incident indicator, 20% synthetic terrain indicator, 10% inverse synthetic drainage proxy, plus small synthetic noise. It is not a calibrated flood probability."
+  },
+  {
+   "item": "Recommended use",
+   "details": "Use to prototype dashboard layouts, map layers, preprocessing, scenario controls and code paths. Replace synthetic fields with sourced, documented data before making evidence-based claims."
+  },
+  {
+   "item": "Potential public sources",
+   "details": "BMC Disaster Management: https://dm.mcgm.gov.in/ ; IMD: https://mausam.imd.gov.in/ ; India Open Government Data: https://www.data.gov.in/ ; OpenCity: https://data.opencity.in/ ; NASA Earthdata: https://www.earthdata.nasa.gov/"
+  },
+  {
+   "item": "Reproducibility",
+   "details": "Random generator seed = 42. Dataset created by a deterministic script for this response."
+  },
+  {
+   "item": "License",
+   "details": "Generated synthetic data may be reused for prototyping. Any external source data added later must retain its own licence and attribution."
+  }
+ ]
+}
