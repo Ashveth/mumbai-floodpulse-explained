@@ -10,7 +10,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () => seo("Overview", "Rainfall patterns, location risk indicators and preparedness priorities for urban flooding in Mumbai (synthetic demo data)."),
   component: () => (
-    <PageShell title="Overview" description="Discover → Analyse → Explain → Simulate → Act">
+    <PageShell page="home">
       <Overview />
     </PageShell>
   ),

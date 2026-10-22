@@ -6,7 +6,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/methodology")({
   head: () => seo("Methodology & Validation", "How FloodPulse processes data, explains demo scores, runs scenarios — and what has not been validated."),
   component: () => (
-    <PageShell title="Methodology & Validation" description="Processing steps, explanation logic and honest validation status">
+    <PageShell page="how">
       <Methodology />
     </PageShell>
   ),

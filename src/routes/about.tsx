@@ -7,7 +7,7 @@ import { seo } from "@/lib/seo";
 export const Route = createFileRoute("/about")({
   head: () => seo("About & Sources", "Dataset source, status, limitations, data dictionary and public sources for Mumbai FloodPulse."),
   component: () => (
-    <PageShell title="About & Sources" description="Dataset provenance, limitations and the data dictionary">
+    <PageShell page="about">
       <About />
     </PageShell>
   ),

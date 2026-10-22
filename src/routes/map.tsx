@@ -10,7 +10,7 @@ const RiskMap = lazy(() => import("@/components/RiskMap"));
 export const Route = createFileRoute("/map")({
   head: () => seo("Flood Risk Map", "Interactive map of demo flood-risk indicators across approximate Mumbai locations."),
   component: () => (
-    <PageShell title="Flood Risk Map" description="Demo risk indicators plotted at approximate demonstration coordinates">
+    <PageShell page="map">
       <MapPage />
     </PageShell>
   ),
