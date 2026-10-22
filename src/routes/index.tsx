@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { ArrowRight, AlertTriangle } from "lucide-react";
-import { PageShell, Panel, Stat } from "@/components/AppShell";
+import { AreaSearch, PageShell, Panel, Stat } from "@/components/AppShell";
+import { useT } from "@/lib/i18n";
 import { useDataset } from "@/lib/dataset-context";
 import { dailySeries, RISK_COLOR_VAR, RISK_LEVELS, round, summariseLocations, categorise } from "@/lib/floodpulse";
 import { seo } from "@/lib/seo";
@@ -20,6 +21,7 @@ const axis = { fontSize: 11, fill: "var(--muted-foreground)" };
 
 function Overview() {
   const ds = useDataset();
+  const { t } = useT();
   const records = ds.status === "ready" ? ds.dataset.records : [];
   const locs = useMemo(() => summariseLocations(records), [records]);
   const daily = useMemo(() => dailySeries(records), [records]);
