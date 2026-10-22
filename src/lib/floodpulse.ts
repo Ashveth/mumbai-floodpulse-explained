@@ -126,7 +126,7 @@ export function parseDataset(text: string, sourceName: string): Dataset {
   const records: FloodRecord[] = parsed.data.map((row) => {
     REQUIRED_COLUMNS.forEach((c) => {
       const v = row[c];
-      if (v === undefined || String(v).trim() === "") missingByColumn[c]++;
+      if (v === undefined || String(v).trim() === "") missingByColumn[c] = (missingByColumn[c] ?? 0) + 1;
     });
     const str = (k: string) => (row[k] ?? "").toString().trim();
     return {
@@ -134,15 +134,15 @@ export function parseDataset(text: string, sourceName: string): Dataset {
       location_id: str("location_id"),
       location_name_demo: str("location_name_demo"),
       date: str("date"),
-      latitude_approx: num(row.latitude_approx),
-      longitude_approx: num(row.longitude_approx),
-      rain_1h_mm_synthetic: num(row.rain_1h_mm_synthetic),
-      rain_24h_mm_synthetic: num(row.rain_24h_mm_synthetic),
-      rain_72h_mm_synthetic: num(row.rain_72h_mm_synthetic),
-      historical_incident_count_synthetic: num(row.historical_incident_count_synthetic),
-      elevation_m_synthetic_demo: num(row.elevation_m_synthetic_demo),
-      drainage_coverage_proxy_synthetic: num(row.drainage_coverage_proxy_synthetic),
-      risk_score_0_100_demo: num(row.risk_score_0_100_demo),
+      latitude_approx: num(row["latitude_approx"]),
+      longitude_approx: num(row["longitude_approx"]),
+      rain_1h_mm_synthetic: num(row["rain_1h_mm_synthetic"]),
+      rain_24h_mm_synthetic: num(row["rain_24h_mm_synthetic"]),
+      rain_72h_mm_synthetic: num(row["rain_72h_mm_synthetic"]),
+      historical_incident_count_synthetic: num(row["historical_incident_count_synthetic"]),
+      elevation_m_synthetic_demo: num(row["elevation_m_synthetic_demo"]),
+      drainage_coverage_proxy_synthetic: num(row["drainage_coverage_proxy_synthetic"]),
+      risk_score_0_100_demo: num(row["risk_score_0_100_demo"]),
       risk_level_demo: str("risk_level_demo"),
       observed_flood_label: str("observed_flood_label"),
       data_status: str("data_status"),
@@ -209,7 +209,7 @@ export function summariseLocations(records: FloodRecord[]): LocationSummary[] {
   });
   return [...groups.entries()].map(([id, rs]) => {
     const sorted = [...rs].sort((a, b) => a.date.localeCompare(b.date));
-    const latest = sorted[sorted.length - 1];
+    const latest = sorted[sorted.length - 1]!;
     return {
       location_id: id,
       name: latest.location_name_demo || id,

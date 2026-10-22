@@ -27,7 +27,7 @@ function RainfallPage() {
   const daily = useMemo(() => dailySeries(records), [records]);
   const r24 = records.map((r) => r.rain_24h_mm_synthetic).filter((x): x is number => x !== null);
   const wettest = daily.reduce((a, b) => ((b.avg24h ?? 0) > (a?.avg24h ?? 0) ? b : a), daily[0]);
-  const hist = BINS.slice(0, -1).map((lo, i) => ({ bin: `${lo}–${BINS[i + 1]}`, count: r24.filter((v) => v >= lo && v < BINS[i + 1]).length }));
+  const hist = BINS.slice(0, -1).map((lo, i) => ({ bin: `${lo}–${BINS[i + 1]}`, count: r24.filter((v) => v >= lo && v < (BINS[i + 1] ?? Infinity)).length }));
   const scatter = records.filter((r) => r.rain_24h_mm_synthetic !== null && r.risk_score_0_100_demo !== null).map((r) => ({ x: r.rain_24h_mm_synthetic, y: r.risk_score_0_100_demo }));
 
   return (

@@ -28,7 +28,7 @@ function LocationPage() {
   const loc = locs.find((l) => l.location_id === id) ?? locs[0];
   if (!loc) return <div className="text-muted-foreground">No locations in the dataset.</div>;
   const series = records.filter((r) => r.location_id === loc.location_id).sort((a, b) => a.date.localeCompare(b.date));
-  const peak = series.reduce((a, b) => ((b.risk_score_0_100_demo ?? -1) > (a.risk_score_0_100_demo ?? -1) ? b : a), series[0]);
+  const peak = series.reduce<typeof series[number]>((a, b) => ((b.risk_score_0_100_demo ?? -1) > (a.risk_score_0_100_demo ?? -1) ? b : a), series[0]!);
   const factors = explainRecord(peak, records);
   const level = loc.avgScore !== null ? categorise(loc.avgScore) : null;
   const peakLevel = (peak.risk_level_demo as RiskLevel) in ACTIONS ? (peak.risk_level_demo as RiskLevel) : null;

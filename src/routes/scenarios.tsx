@@ -81,7 +81,7 @@ function ScenarioPage() {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <Stat label="Locations in scenario" value={rows.length} hint={d} />
         <Stat label="Escalated category" value={escalated.length} tone="warn" hint="vs original demo level" />
-        <Stat label="High + Very High (scenario)" value={dist[2].Scenario + dist[3].Scenario} tone="crit" hint={`was ${dist[2].Original + dist[3].Original}`} />
+        <Stat label="High + Very High (scenario)" value={(dist[2]?.Scenario ?? 0) + (dist[3]?.Scenario ?? 0)} tone="crit" hint={`was ${(dist[2]?.Original ?? 0) + (dist[3]?.Original ?? 0)}`} />
         <Stat label="Max scenario score" value={rows[0]?.s!.score ?? "Not available"} tone="ok" hint="Calculated, illustrative" />
       </div>
 

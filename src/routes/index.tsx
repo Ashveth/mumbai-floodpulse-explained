@@ -70,7 +70,7 @@ function Overview() {
         <Stat label="Total records" value={records.length} hint="Location-day rows loaded" />
         <Stat label="Unique locations" value={locs.length} hint="Demo grid cells" />
         <Stat label="Date range" value={<span className="text-base">{dates[0] ?? "Not available"} → {dates.at(-1) ?? "—"}</span>} hint={`${dates.length} days`} />
-        <Stat label="High / Very High rows" value={recByCat[2].value + recByCat[3].value} hint="Demo indicator, not events" tone="crit" />
+        <Stat label="High / Very High rows" value={(recByCat[2]?.value ?? 0) + (recByCat[3]?.value ?? 0)} hint="Demo indicator, not events" tone="crit" />
       </div>
 
       <div className="grid gap-3 md:grid-cols-4">
