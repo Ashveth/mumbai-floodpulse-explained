@@ -126,7 +126,7 @@ function Overview() {
               <BarChart data={ranked} layout="vertical" margin={{ left: 10 }}>
                 <CartesianGrid stroke="var(--border)" horizontal={false} />
                 <XAxis type="number" domain={[0, 100]} tick={axis} />
-                <YAxis type="category" dataKey="name" tick={{ ...axis, fontSize: 10 }} width={150} />
+                <YAxis type="category" dataKey="name" tick={{ ...axis, fontSize: 10 }} width={150} interval={0} />
                 <Tooltip />
                 <Bar dataKey="avg" name="Average" radius={[0, 2, 2, 0]}>
                   {ranked.map((r) => <Cell key={r.name} fill={RISK_COLOR_VAR[categorise(r.avg ?? 0)]} />)}
