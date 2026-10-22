@@ -45,24 +45,18 @@ function Overview() {
     <div className="space-y-6">
       <section className="grid gap-6 border-b border-border pb-6 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Predict. Explain. Prioritise. Protect.</p>
-          <h2 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">
-            Understand the risk. See the factors. Plan the response.
-          </h2>
-          <p className="mt-3 max-w-xl text-muted-foreground">
-            Explore rainfall patterns, location-level risk indicators, and preparedness priorities for urban flooding in Mumbai.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link to="/map" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90">Open the risk map <ArrowRight className="h-4 w-4" /></Link>
-            <Link to="/scenarios" className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold hover:bg-muted">Run a scenario</Link>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{t("hero.kicker")}</p>
+          <h2 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">{t("hero.title")}</h2>
+          <p className="mt-3 max-w-xl text-muted-foreground">{t("hero.sub")}</p>
+          <AreaSearch big className="mt-4 max-w-xl" />
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link to="/map" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90">{t("hero.cta.map")} <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/safety" className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-4 py-2 text-sm font-semibold hover:bg-muted">{t("hero.cta.safety")}</Link>
           </div>
         </div>
         <div className="self-end rounded-md border border-warning/50 bg-warning/10 p-4 text-sm">
-          <div className="flex items-center gap-2 font-bold"><AlertTriangle className="h-4 w-4 text-warning" /> Synthetic demo data</div>
-          <p className="mt-1 text-muted-foreground">
-            Every rainfall value, incident count, elevation, coordinate and risk score shown here is synthetic or illustrative.
-            Risk counts are demo indicators, not confirmed flood events. No verified observed-flood labels are included.
-          </p>
+          <div className="flex items-center gap-2 font-bold"><AlertTriangle className="h-4 w-4 text-warning" /> {t("hero.note.t")}</div>
+          <p className="mt-1 text-muted-foreground">{t("hero.note.b")}</p>
         </div>
       </section>
 
