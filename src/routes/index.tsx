@@ -47,7 +47,7 @@ function Overview() {
     <div className="space-y-6">
       <section className="grid gap-6 border-b border-border pb-6 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">{t("hero.kicker")}</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">{t("hero.kicker")}</p>
           <h2 className="mt-2 text-3xl font-extrabold leading-tight tracking-tight md:text-4xl">{t("hero.title")}</h2>
           <p className="mt-3 max-w-xl text-muted-foreground">{t("hero.sub")}</p>
           <AreaSearch big className="mt-4 max-w-xl" />

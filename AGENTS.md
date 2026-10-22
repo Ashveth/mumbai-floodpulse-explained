@@ -13,3 +13,4 @@
 - Dataset is the uploaded CSV served from public/data and parsed client-side in src/lib/dataset-context.tsx; never generate replacement data — on failure show the upload/error state.
 - All calculations (aggregates, factor explanations, scenarios) live in src/lib/floodpulse.ts and must be labelled as calculated, distinct from original values.
 - Leaflet is loaded only client-side via React.lazy (src/components/RiskMap.tsx) because it touches window at import.
+- UI text is translated via src/lib/i18n.tsx (en/hi/mr dictionaries); add every new user-facing string to all three.
