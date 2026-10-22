@@ -23,9 +23,7 @@ function DataPage() {
   const [page, setPage] = useState(0);
   const [sortKey, setSortKey] = useState<keyof FloodRecord>("date");
   const [asc, setAsc] = useState(true);
-  if (ds.status !== "ready") return null;
-  const { records, quality, sourceName } = ds.dataset;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const records = ds.status === "ready" ? ds.dataset.records : [];
   const filtered = useMemo(() => {
     const s = q.toLowerCase();
     const f = s ? records.filter((r) => `${r.location_name_demo} ${r.location_id} ${r.date} ${r.risk_level_demo}`.toLowerCase().includes(s)) : records;
@@ -34,6 +32,8 @@ function DataPage() {
       return (x < y ? -1 : x > y ? 1 : 0) * (asc ? 1 : -1);
     });
   }, [records, q, sortKey, asc]);
+  if (ds.status !== "ready") return null;
+  const { quality, sourceName } = ds.dataset;
   const pages = Math.max(1, Math.ceil(filtered.length / PAGE));
   const view = filtered.slice(page * PAGE, page * PAGE + PAGE);
   const totalMissing = Object.values(quality.missingByColumn).reduce((a, b) => a + b, 0);

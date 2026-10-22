@@ -10,14 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as DataRouteImport } from './routes/data'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as RainfallRouteImport } from './routes/rainfall'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataRoute = DataRouteImport.update({
+  id: '/data',
+  path: '/data',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocationsRoute = LocationsRouteImport.update({
@@ -28,6 +41,11 @@ const LocationsRoute = LocationsRouteImport.update({
 const MapRoute = MapRouteImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RainfallRoute = RainfallRouteImport.update({
@@ -43,38 +61,75 @@ const ScenariosRoute = ScenariosRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/data': typeof DataRoute
   '/locations': typeof LocationsRoute
   '/map': typeof MapRoute
+  '/methodology': typeof MethodologyRoute
   '/rainfall': typeof RainfallRoute
   '/scenarios': typeof ScenariosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/data': typeof DataRoute
   '/locations': typeof LocationsRoute
   '/map': typeof MapRoute
+  '/methodology': typeof MethodologyRoute
   '/rainfall': typeof RainfallRoute
   '/scenarios': typeof ScenariosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/data': typeof DataRoute
   '/locations': typeof LocationsRoute
   '/map': typeof MapRoute
+  '/methodology': typeof MethodologyRoute
   '/rainfall': typeof RainfallRoute
   '/scenarios': typeof ScenariosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/locations' | '/map' | '/rainfall' | '/scenarios'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/data'
+    | '/locations'
+    | '/map'
+    | '/methodology'
+    | '/rainfall'
+    | '/scenarios'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/locations' | '/map' | '/rainfall' | '/scenarios'
-  id: '__root__' | '/' | '/locations' | '/map' | '/rainfall' | '/scenarios'
+  to:
+    | '/'
+    | '/about'
+    | '/data'
+    | '/locations'
+    | '/map'
+    | '/methodology'
+    | '/rainfall'
+    | '/scenarios'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/data'
+    | '/locations'
+    | '/map'
+    | '/methodology'
+    | '/rainfall'
+    | '/scenarios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  DataRoute: typeof DataRoute
   LocationsRoute: typeof LocationsRoute
   MapRoute: typeof MapRoute
+  MethodologyRoute: typeof MethodologyRoute
   RainfallRoute: typeof RainfallRoute
   ScenariosRoute: typeof ScenariosRoute
 }
@@ -86,6 +141,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data': {
+      id: '/data'
+      path: '/data'
+      fullPath: '/data'
+      preLoaderRoute: typeof DataRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/locations': {
@@ -100,6 +169,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/map'
       preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rainfall': {
@@ -121,8 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  DataRoute: DataRoute,
   LocationsRoute: LocationsRoute,
   MapRoute: MapRoute,
+  MethodologyRoute: MethodologyRoute,
   RainfallRoute: RainfallRoute,
   ScenariosRoute: ScenariosRoute,
 }
